@@ -17,6 +17,8 @@
     <input type="text" id="input">
     <button id="send">Send</button>
 
+    <div id="messages"></div>
+
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -30,6 +32,13 @@
             socket.emit('user-message', message)
         })
 
+        //Handle incoming message from the server
+        const messageContainer = document.getElementById('messages')
+        socket.on('server-message', (message) => {
+            const p = document.createElement('p');
+            p.innerText = message;
+            messageContainer.appendChild(p);
+        })
     </script>
 </body>
 
